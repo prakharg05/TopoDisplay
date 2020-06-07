@@ -1,0 +1,113 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 900;
+            height: 600;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "192.168.4.20", "label": "192.168.4.20", "shape": "dot", "title": "IP: 192.168.4.20"}, {"id": "5.79.83.131", "label": "5.79.83.131", "shape": "dot", "title": "IP: 5.79.83.131"}, {"id": "172.217.163.138", "label": "172.217.163.138", "shape": "dot", "title": "IP: 172.217.163.138"}, {"id": "172.217.174.228", "label": "172.217.174.228", "shape": "dot", "title": "IP: 172.217.174.228"}, {"id": "192.168.4.2", "label": "192.168.4.2", "shape": "dot", "title": "IP: 192.168.4.2"}, {"id": "192.168.4.14", "label": "192.168.4.14", "shape": "dot", "title": "IP: 192.168.4.14"}, {"id": "104.27.140.24", "label": "104.27.140.24", "shape": "dot", "title": "IP: 104.27.140.24"}, {"id": "74.125.68.188", "label": "74.125.68.188", "shape": "dot", "title": "IP: 74.125.68.188"}, {"id": "216.58.200.138", "label": "216.58.200.138", "shape": "dot", "title": "IP: 216.58.200.138"}, {"id": "172.217.174.238", "label": "172.217.174.238", "shape": "dot", "title": "IP: 172.217.174.238"}, {"id": "216.58.196.67", "label": "216.58.196.67", "shape": "dot", "title": "IP: 216.58.196.67"}, {"id": "216.239.32.117", "label": "216.239.32.117", "shape": "dot", "title": "IP: 216.239.32.117"}]);
+        edges = new vis.DataSet([{"from": "192.168.4.20", "to": "5.79.83.131", "value": 48}, {"from": "192.168.4.14", "to": "192.168.4.2", "value": 60}, {"from": "172.217.174.228", "to": "192.168.4.14", "value": 60}, {"from": "172.217.163.138", "to": "192.168.4.14", "value": 76}, {"from": "104.27.140.24", "to": "192.168.4.14", "value": 71}, {"from": "192.168.4.2", "to": "192.168.4.20", "value": 61}, {"from": "192.168.4.14", "to": "74.125.68.188", "value": 76}, {"from": "192.168.4.14", "to": "216.58.196.67", "value": 313}, {"from": "192.168.4.14", "to": "216.58.200.138", "value": 60}, {"from": "172.217.174.238", "to": "192.168.4.14", "value": 60}, {"from": "192.168.4.14", "to": "216.239.32.117", "value": 60}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -80000,
+            "springConstant": 0.001,
+            "springLength": 250
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
